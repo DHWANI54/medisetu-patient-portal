@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Patient Login</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+  <h2>Medisetu – Patient Login</h2>
+
+  <input type="text" id="patientId" placeholder="Enter Patient ID">
+  <p class="error" id="error"></p>
+
+  <button onclick="login()">Continue</button>
+</div>
+
+<script>
+  // Auto redirect if already logged in
+  if (localStorage.getItem("patientId")) {
+    window.location.href = "reports.html";
+  }
+
+  function login() {
+    const id = document.getElementById("patientId").value;
+
+    if (!id) {
+      document.getElementById("error").innerText =
+        "Please enter Patient ID";
+      return;
+    }
+
+    localStorage.setItem("patientId", id);
+    window.location.href = "reports.html";
+  }
+</script>
+
+</body>
+</html>

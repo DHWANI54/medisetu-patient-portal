@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reports Locker</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+  <h2>Reports Locker</h2>
+  <p>Patient ID: <span id="pid"></span></p>
+
+  <button onclick="logout()">Logout</button>
+
+  <input type="text" placeholder="Search reports">
+
+  <select>
+    <option>All</option>
+    <option>Normal</option>
+    <option>Abnormal</option>
+    <option>Pending</option>
+  </select>
+
+  <div id="reports"></div>
+</div>
+
+<script>
+  const reports = [
+    { id: 1, title: "CBC Test", date: "12 Jan", source: "Apollo", status: "normal" },
+    { id: 2, title: "X-Ray", date: "10 Jan", source: "AIIMS", status: "abnormal" }
+  ];
+
+  document.getElementById("pid").innerText =
+    localStorage.getItem("patientId");
+
+  const list = document.getElementById("reports");
+
+  reports.forEach(r => {
+    list.innerHTML += `
+      <div class="card">
+        <h4>${r.title}</h4>
+        <p>${r.source} | ${r.date}</p>
+        <span class="badge ${r.status}">${r.status}</span><br><br>
+        <button onclick="openReport(${r.id})">View Report</button>
+      </div>
+    `;
+  });
+
+  function openReport(id) {
+    window.location.href = "report.html?id=" + id;
+  }
+
+  function logout() {
+    localStorage.removeItem("patientId");
+    window.location.href = "index.html";
+  }
+</script>
+
+</body>
+</html>
