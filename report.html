@@ -1,33 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Report Details</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Medisetu Report Details</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="page-report">
+  <div class="ambient"></div>
 
-<div class="container">
-  <button onclick="goBack()">← Back</button>
+  <header class="topbar">
+    <div class="brand compact">
+      <div class="brand-mark">M</div>
+      <div>
+        <p class="brand-name">Medisetu</p>
+        <p class="brand-sub">Report Details</p>
+      </div>
+    </div>
+    <button class="ghost" id="backBtn" type="button">Back to reports</button>
+  </header>
 
-  <div class="card">
-    <h3>CBC Test</h3>
-    <p>Date: 12 Jan</p>
-    <p>Source: Apollo</p>
-    <span class="badge normal">Normal</span>
-  </div>
+  <main class="report-shell">
+    <section class="report-main" id="details"></section>
+    <aside class="report-aside">
+      <div class="card">
+        <h3>Share with a doctor</h3>
+        <p>Generate a secure link to share this report with your care team.</p>
+        <button class="primary" type="button">Generate link</button>
+      </div>
+      <div class="card soft">
+        <h3>Need assistance?</h3>
+        <p>Call Medisetu support at 1800-555-0173 for access help.</p>
+      </div>
+    </aside>
+  </main>
 
-  <div class="card">
-    <h4>Report File</h4>
-    <p>cbc_report.pdf (200 KB)</p>
-    <button>Download</button>
-  </div>
-</div>
-
-<script>
-  function goBack() {
-    window.location.href = "reports.html";
-  }
-</script>
-
+  <script src="report.js"></script>
 </body>
 </html>

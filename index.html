@@ -1,39 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Patient Login</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Medisetu Patient Login</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="page-auth">
+  <div class="ambient"></div>
 
-<div class="container">
-  <h2>Medisetu – Patient Login</h2>
+  <main class="auth-shell">
+    <section class="auth-card">
+      <div class="brand">
+        <div class="brand-mark">M</div>
+        <div>
+          <p class="brand-name">Medisetu</p>
+          <p class="brand-sub">Patient Portal</p>
+        </div>
+      </div>
 
-  <input type="text" id="patientId" placeholder="Enter Patient ID">
-  <p class="error" id="error"></p>
+      <h1>Welcome back</h1>
+      <p class="lead">Secure access to lab reports, imaging, and clinician notes.</p>
 
-  <button onclick="login()">Continue</button>
-</div>
+      <label class="field" for="patientId">
+        <span>Patient ID</span>
+        <input type="text" id="patientId" placeholder="e.g. MD-2041-9823" autocomplete="off">
+      </label>
+      <p class="helper">Demo ID: <span id="demoId"></span>
+        <button type="button" class="text-link" id="useDemo">Use demo</button>
+      </p>
+      <p class="error" id="error"></p>
 
-<script>
-  // Auto redirect if already logged in
-  if (localStorage.getItem("patientId")) {
-    window.location.href = "reports.html";
-  }
+      <button class="primary" id="continueBtn">Continue to dashboard</button>
 
-  function login() {
-    const id = document.getElementById("patientId").value;
+      <div class="meta-grid">
+        <div class="meta-card">
+          <h3>Encrypted access</h3>
+          <p>Session data stays on this device for a private login experience.</p>
+        </div>
+        <div class="meta-card">
+          <h3>Report timeline</h3>
+          <p>Track diagnostics across visits with clear status indicators.</p>
+        </div>
+        <div class="meta-card">
+          <h3>Download ready</h3>
+          <p>Export PDFs for doctors, insurance, or personal records.</p>
+        </div>
+      </div>
+    </section>
 
-    if (!id) {
-      document.getElementById("error").innerText =
-        "Please enter Patient ID";
-      return;
-    }
+    <aside class="auth-aside">
+      <div class="aside-card">
+        <h2>Care timeline</h2>
+        <ul class="timeline">
+          <li>
+            <span class="dot"></span>
+            <div>
+              <p class="timeline-title">Blood work scheduled</p>
+              <p class="muted">Sample collected and queued for analysis.</p>
+            </div>
+          </li>
+          <li>
+            <span class="dot"></span>
+            <div>
+              <p class="timeline-title">Radiology report ready</p>
+              <p class="muted">New imaging results available for review.</p>
+            </div>
+          </li>
+          <li>
+            <span class="dot"></span>
+            <div>
+              <p class="timeline-title">Follow up recommended</p>
+              <p class="muted">Clinician notes updated with next steps.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
 
-    localStorage.setItem("patientId", id);
-    window.location.href = "reports.html";
-  }
-</script>
+      <div class="aside-card soft">
+        <h2>Need help?</h2>
+        <p>Our support team is available 24x7 for access and report questions.</p>
+        <button class="ghost" type="button">View support options</button>
+      </div>
+    </aside>
+  </main>
 
+  <script src="login.js"></script>
 </body>
 </html>
