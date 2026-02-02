@@ -1,60 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Reports Locker</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Medisetu Reports Locker</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="page-dashboard">
+  <div class="ambient"></div>
 
-<div class="container">
-  <h2>Reports Locker</h2>
-  <p>Patient ID: <span id="pid"></span></p>
-
-  <button onclick="logout()">Logout</button>
-
-  <input type="text" placeholder="Search reports">
-
-  <select>
-    <option>All</option>
-    <option>Normal</option>
-    <option>Abnormal</option>
-    <option>Pending</option>
-  </select>
-
-  <div id="reports"></div>
-</div>
-
-<script>
-  const reports = [
-    { id: 1, title: "CBC Test", date: "12 Jan", source: "Apollo", status: "normal" },
-    { id: 2, title: "X-Ray", date: "10 Jan", source: "AIIMS", status: "abnormal" }
-  ];
-
-  document.getElementById("pid").innerText =
-    localStorage.getItem("patientId");
-
-  const list = document.getElementById("reports");
-
-  reports.forEach(r => {
-    list.innerHTML += `
-      <div class="card">
-        <h4>${r.title}</h4>
-        <p>${r.source} | ${r.date}</p>
-        <span class="badge ${r.status}">${r.status}</span><br><br>
-        <button onclick="openReport(${r.id})">View Report</button>
+  <header class="topbar">
+    <div class="brand compact">
+      <div class="brand-mark">M</div>
+      <div>
+        <p class="brand-name">Medisetu</p>
+        <p class="brand-sub">Reports Locker</p>
       </div>
-    `;
-  });
+    </div>
+    <div class="topbar-actions">
+      <div class="chip">
+        <span class="chip-label">Patient ID</span>
+        <span id="pid"></span>
+      </div>
+      <button class="ghost" id="logoutBtn" type="button">Sign out</button>
+    </div>
+  </header>
 
-  function openReport(id) {
-    window.location.href = "report.html?id=" + id;
-  }
+  <main class="dashboard">
+    <section class="hero">
+      <div>
+        <h1>Reports locker</h1>
+        <p class="lead">Review results, track updates, and download files securely.</p>
+        <p class="muted">Last synced: <span id="lastSynced">--</span></p>
+      </div>
+      <div class="stats">
+        <div class="stat-card">
+          <p>Total reports</p>
+          <h3 id="statTotal">0</h3>
+        </div>
+        <div class="stat-card">
+          <p>Normal</p>
+          <h3 id="statNormal">0</h3>
+        </div>
+        <div class="stat-card">
+          <p>Attention</p>
+          <h3 id="statAbnormal">0</h3>
+        </div>
+        <div class="stat-card">
+          <p>Pending</p>
+          <h3 id="statPending">0</h3>
+        </div>
+      </div>
+    </section>
 
-  function logout() {
-    localStorage.removeItem("patientId");
-    window.location.href = "index.html";
-  }
-</script>
+    <section class="toolbar">
+      <label class="field" for="search">
+        <span>Search reports</span>
+        <input type="text" id="search" placeholder="Search by test or facility">
+      </label>
+      <label class="field" for="filter">
+        <span>Status</span>
+        <select id="filter">
+          <option value="All">All</option>
+          <option value="normal">Normal</option>
+          <option value="abnormal">Attention</option>
+          <option value="pending">Pending</option>
+        </select>
+      </label>
+    </section>
 
+    <section class="list-section">
+      <div id="loading" class="loading-grid">
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+      </div>
+      <div id="reports" class="reports-grid"></div>
+      <p id="empty" class="empty"></p>
+    </section>
+  </main>
+
+  <script src="reports.js"></script>
 </body>
 </html>
